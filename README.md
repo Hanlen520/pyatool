@@ -1,10 +1,43 @@
 # pyatool
 
+[English Version](https://github.com/williamfzc/pyatool/blob/master/README_en.md)
+
 [![Maintainability](https://api.codeclimate.com/v1/badges/5f6647a3121aa7d278ab/maintainability)](https://codeclimate.com/github/williamfzc/pyatool/maintainability)
 [![PyPI version](https://badge.fury.io/py/pyatool.svg)](https://badge.fury.io/py/pyatool)
 [![Downloads](https://pepy.tech/badge/pyatool)](https://pepy.tech/project/pyatool)
+[![Documentation Status](https://readthedocs.org/projects/pyatool/badge/?version=latest)](https://pyatool.readthedocs.io/en/latest/?badge=latest)
 
 > python android toolkit 🔨
+
+## TL;DR
+
+直接用我们提供的标准库，对android设备进行各种操作。
+
+```python
+from pyatool import PYAToolkit
+
+# 初始化
+device = PYAToolkit('123456F')
+
+# 1. 直接调用
+package_list = device.show_package()
+# 2. 或者 通过标准库（有自动补全，能够看到真实的方法实现）
+package_list = device.std.show_package(toolkit=device)
+
+# 具体返回内容与调用的方法实现有关
+print(package_list)
+```
+
+- 完整API参见[官方文档](https://pyatool.readthedocs.io/en/latest/)
+- 更多使用例子参见[demo.py](demo.py)
+
+## 安装
+
+请使用python3
+
+```python
+pip install pyatool
+```
 
 ## 目标
 
@@ -14,13 +47,7 @@
 - 减少重复工作，共享开发
 - 降低使用门槛，让所有人都可以快速上手
 
-## 设计与使用
-
-### 导入
-
-```python
-from pyatool import PYAToolkit
-```
+## 还想要更多功能？
 
 ### 自定义函数
 
@@ -74,18 +101,11 @@ device_toolkit = PYAToolkit('123456F')
 device_toolkit.download_and_install()
 ```
 
-#### 单次开发
+### 单次开发
 
 pyatool如此设计的目的是为了能够尽量减少重复工作。为了方便所有人加入开发，往内置库中添加方法非常容易。
 
-如果你编写了一些好方法并希望将其合入pyatool内置库以方便后续使用，你只需要：
-
-- 直接在github上编辑`extras.py`
-- 将写好的函数按照格式粘贴到`extras.py`中
-- 在`__all__`中加入你的函数名称
-- 描述你的修改，然后点击`Propose file change`，github会自动为你发起pull request
-
-要让库变得更方便好用还是需要各位的共同努力~
+如果你编写了一些好方法并希望将其合入pyatool标准库以方便后续使用，你只需要将你的方法添加到 `extras.py` 中，发起PR！
 
 ## 具体案例
 
@@ -93,7 +113,7 @@ pyatool如此设计的目的是为了能够尽量减少重复工作。为了方�
 
 ```python
 from pyatool import PYAToolkit
-from whenconnect import when_connect, start_detect
+from whenconnect import when_connect
 
 
 VERSION = 'v0.1.4'
@@ -113,20 +133,9 @@ def install_sh(device_id):
 
 
 when_connect(device='all', do=install_sh)
-start_detect()
 ```
 
 就完成了。在运行之后，一旦有android设备接入，将会自动为其安装apk。
-
-## API
-
-推荐直接看 [extras.py](https://github.com/williamfzc/pyatool/blob/master/pyatool/extras.py)
-
-## 安装
-
-```python
-pip install pyatool
-```
 
 ## 意见与建议
 
@@ -134,4 +143,4 @@ pip install pyatool
 
 ## 协议
 
-MIT
+[MIT](LICENSE)
